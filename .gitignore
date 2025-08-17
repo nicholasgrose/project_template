@@ -23,6 +23,12 @@
 .idea/**/dictionaries
 .idea/**/shelf
 
+# Specific deployment configs
+.idea/**/deployment.xml
+
+# GitToolbox plugin
+.idea/**/git_toolbox_prj.xml
+
 # AWS User-specific
 .idea/**/aws.xml
 

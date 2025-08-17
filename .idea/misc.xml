@@ -3,9 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (template_repo)" />
   </component>
-  <component name="DiscordProjectSettings">
-    <option name="show" value="ASK" />
-    <option name="description" value="" />
-  </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 virtualenv at C:\Users\Nicholas\PycharmProjects\template_repo\docs\.venv" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (template_repo)" project-jdk-type="Python SDK" />
 </project>
