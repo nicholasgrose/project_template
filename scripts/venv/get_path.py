@@ -15,7 +15,7 @@ def venv_python(venv_dir: Path) -> str:
 
 def find_repo_root() -> Path:
     """
-    Finds the root of the repository by walking up directories until it finds the scripts directory.
+    Finds the root of the repository by walking up directories until it finds the scripts/ directory.
     :return: The path to the repo root
     """
     file_path = Path(__file__).resolve().parent

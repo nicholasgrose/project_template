@@ -30,7 +30,7 @@ Run the following command in your cloned template repo to bootstrap the template
 
 Run the following command to create a new project:
 
-`task cli:new  --taskfile TEMPLATE_TASKFILE_PATH`
+`task cli:new  --taskfile <TEMPLATE_TASKFILE_PATH>`
 
 ### To Add to an Existing Project
 
@@ -40,4 +40,4 @@ Run the following command to create a new project:
 
 Run the following command to add to an existing project:
 
-`task cli:add --taskfile TEMPLATE_TASKFILE_PATH`
+`task cli:add --taskfile <TEMPLATE_TASKFILE_PATH>`
