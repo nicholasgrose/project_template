@@ -33,19 +33,3 @@ tasks:
     desc: Serve docs locally with live reload
     deps: [ docs:bootstrap ]
     cmd: "{{.PY}} -m scripts.docs.mkdocs serve"
-
-  cli:bootstrap:
-    desc: Bootstrap CLI dependencies
-    status:
-      - test -d generation_cli/.venv
-    cmd: "{{.PY}} -m scripts.generation_cli.bootstrap_venv"
-
-  cli:new:
-    desc: Create a new repository from this project template
-    deps: [ cli:boostrap ]
-    cmd: "{{.PY}} -m generation_cli.new_repo"
-
-  cli:add:
-    desc: Adds this template to an existing repository
-    deps: [ cli:boostrap ]
-    cmd: "{{.PY}} -m generation_cli.existing_repo"

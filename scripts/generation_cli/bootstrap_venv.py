@@ -1,4 +1,4 @@
-from scripts.venv.build import build_configured_venv_from_repo_root
+from scripts.venv_wrappers.build import build_configured_venv_from_repo_root
 
 
 def main() -> None:
