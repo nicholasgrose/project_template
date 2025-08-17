@@ -1,0 +1,36 @@
+version: '3'
+
+vars:
+  PY: "{{.PYTHON | default `python`}}"
+
+tasks:
+  bootstrap:
+    desc: Bootstrap the repository (git init, hooks, docs env)
+    deps:
+      - git:bootstrap
+      - docs:bootstrap
+
+  git:bootstrap:
+    desc: Bootstrap git repo
+    status:
+      - git status
+    cmds:
+      - git init
+      - git add -A
+      - git commit -m "Initial commit"
+      - git branch -M main
+      - git remote add origin git@github.com:nicholasgrose/project_template.git
+      - git push -u origin main
+
+  docs:bootstrap:
+    desc: Create/update MkDocs virtualenv and install deps
+    status:
+      - test -d docs/.venv
+    cmds:
+      - "{{.PY}} -m scripts.docs.mkdocs_bootstrap"
+
+  docs:serve:
+    desc: Serve docs locally with live reload
+    deps: [docs:bootstrap]
+    cmds:
+      - "{{.PY}} -m scripts.docs.mkdocs serve"
