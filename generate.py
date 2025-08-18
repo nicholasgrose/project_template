@@ -6,8 +6,7 @@ from pathlib import Path
 import scripts.generation_cli.venv_bootstrap
 from scripts.venv_wrappers.get_path import venv_python
 
-APP_NAME = "project_template"  # choose a stable name
-GENERATOR_MODULE = "generation_cli"  # what you want to run via -m
+GENERATOR_MODULE = "generation_cli"  # what will be run via python -m
 LAUNCHER_VERSION = "2025.08.17.1"  # bump to force reinstallation of dependencies
 
 
