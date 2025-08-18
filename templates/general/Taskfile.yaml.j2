@@ -1,7 +1,8 @@
 version: '3'
 
 vars:
-  PY: "{{.PYTHON | default `python`}}"
+  {% raw %}PY: "{{.PYTHON | default `python`}}"{% endraw %}
+  GIT_REMOTE: "{{ repo_remote_url }}"
 
 tasks:
   bootstrap:
@@ -20,9 +21,10 @@ tasks:
       - git add -A
       - git commit -m "Initial commit"
       - git branch -M main
-      - git remote add origin git@github.com:nicholasgrose/project_template.git
+      - "git remote add origin {.GIT_REMOTE}"
       - git push -u origin main
 
+  {% raw %}
   docs:bootstrap:
     desc: Create/update MkDocs virtualenv and install deps
     status:
@@ -33,3 +35,4 @@ tasks:
     desc: Serve docs locally with live reload
     deps: [ docs:bootstrap ]
     cmd: "{{.PY}} -m scripts.docs.mkdocs serve"
+  {% endraw %}

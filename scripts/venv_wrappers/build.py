@@ -2,7 +2,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from scripts.venv.get_path import venv_python, find_repo_root
+from scripts.venv_wrappers.get_path import venv_python, find_repo_root
 
 
 def create_virtual_environment(directory: Path) -> Path:

@@ -2,6 +2,7 @@ version: '3'
 
 vars:
   PY: "{{.PYTHON | default `python`}}"
+  GIT_REMOTE: "git@github.com:nicholasgrose/project_template.git"
 
 tasks:
   bootstrap:
@@ -20,7 +21,7 @@ tasks:
       - git add -A
       - git commit -m "Initial commit"
       - git branch -M main
-      - git remote add origin git@github.com:nicholasgrose/project_template.git
+      - "git remote add origin {.GIT_REMOTE}"
       - git push -u origin main
 
   docs:bootstrap:
@@ -42,10 +43,10 @@ tasks:
 
   cli:new:
     desc: Create a new repository from this project template
-    deps: [ cli:boostrap ]
+    deps: [ cli:bootstrap ]
     cmd: "{{.PY}} -m generation_cli.new_repo"
 
   cli:add:
     desc: Adds this template to an existing repository
-    deps: [ cli:boostrap ]
+    deps: [ cli:bootstrap ]
     cmd: "{{.PY}} -m generation_cli.existing_repo"
