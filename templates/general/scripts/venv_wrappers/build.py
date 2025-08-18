@@ -1,5 +1,5 @@
 import subprocess
-import sys
+import venv
 from pathlib import Path
 
 from scripts.venv_wrappers.get_path import venv_python, find_repo_root
@@ -13,7 +13,12 @@ def create_virtual_environment(directory: Path) -> Path:
     """
     print("Creating virtual environment...")
     venv_dir = directory / ".venv"
-    subprocess.run([sys.executable, "-m", "venv", venv_dir])
+
+    if venv_python(venv_dir).is_file():
+        print("Virtual environment already exists.")
+        return venv_dir
+
+    venv.create(venv_dir, with_pip=True, clear=False, symlinks=True, upgrade_deps=True)
 
     return venv_dir
 
@@ -49,5 +54,5 @@ def build_configured_venv_from_repo_root(path: str) -> None:
     :return: None
     """
     repo_root = find_repo_root()
-    directory = repo_root / path
+    directory = repo_root / path if len(path.strip()) > 0 else repo_root
     build_configured_virtual_environment(directory)

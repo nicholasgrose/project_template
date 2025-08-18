@@ -36,17 +36,13 @@ tasks:
     cmd: "{{.PY}} -m scripts.docs.mkdocs serve"
 
   cli:bootstrap:
-    desc: Bootstrap CLI dependencies
+    desc: Create/update CLI virtualenv and install deps
     status:
       - test -d generation_cli/.venv
-    cmd: "{{.PY}} -m scripts.generation_cli.bootstrap_venv"
+    cmd: "{{.PY}} -m scripts.generation_cli.venv_bootstrap"
 
-  cli:new:
-    desc: Create a new repository from this project template
-    deps: [ cli:bootstrap ]
-    cmd: "{{.PY}} -m generation_cli.new_repo"
-
-  cli:add:
-    desc: Adds this template to an existing repository
-    deps: [ cli:bootstrap ]
-    cmd: "{{.PY}} -m generation_cli.existing_repo"
+  root:bootstrap:
+    desc: Bootstrap the scripts of the overall repository
+    status:
+      - test -d .venv
+    cmd: "{{.PY}} -m scripts.root.venv_bootstrap"

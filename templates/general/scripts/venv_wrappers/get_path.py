@@ -1,16 +1,16 @@
-import os
 import platform
 from pathlib import Path
 
 
-def venv_python(venv_dir: Path) -> str:
+def venv_python(venv_dir: Path) -> Path:
     """
     Given the venv directory, returns the path to the python executable.
     :param venv_dir: The directory to the venv
     :return: The path to the python executable
     """
-    return os.path.join(venv_dir, "Scripts" if platform.system() == "Windows" else "bin",
-                        "python" + (".exe" if platform.system() == "Windows" else ""))
+    if platform.system() == "Windows":
+        return venv_dir / "Scripts" / "python.exe"
+    return venv_dir / "bin" / "python"
 
 
 def find_repo_root() -> Path:

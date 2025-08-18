@@ -1,43 +1,80 @@
 # Usage
 
+This project provides a self-bootstrapping CLI. On first use it creates and manages an isolated virtual environment for
+its own dependencies, so you don’t need to manually install libraries like Jinja.
+
 ## Requirements
 
-Before installing, you need to have the following installed:
+- [Git](https://git-scm.com)
+- [Python](https://www.python.org) 3.12 or newer is available on your PATH
 
-| Requirement                      | Why It's Used                                                                                                                |
-|----------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| [Git](https://git-scm.com)       | Git is the version control system. If you don't know what this is, I wouldn't recommend using this template.                 |
-| [Task](https://taskfile.dev)     | Task provides a simple, cross-platform, and declarative way to run setup scripts.                                            |
-| [Python](https://www.python.org) | Python is a cross-platform scripting language, and it is required to use [mkdocs](https://www.mkdocs.org) for documentation. |
+## Quickstart
 
-## Project Template Setup
+### Clone the template repository:
 
-### Clone the Template Repository
+```shell
+git clone git@github.com:nicholasgrose/project_template.git
+cd project_template
+```
 
-Run the following command to clone the template repository:
+### Use the CLI from the repo root
 
-`git clone git@github.com:nicholasgrose/project_template.git`
+You can see the help text by running:
 
-### Bootstrap the Template Tools
+```shell
+python ./generate.py --help
+```
 
-Run the following command in your cloned template repo to bootstrap the template tools:
+On the first run, the CLI will:
 
-`task cli:bootstrap`
+- Create a virtual environment in its directory.
+- Install the CLI’s pinned dependencies into that environment.
+- Re-run the command under that environment automatically.
 
-## Using the Template
+Subsequent runs reuse the environment.
 
-### To Create a New Project
+## Example Usage
 
-Run the following command to create a new project:
+### Create a new project from the template
 
-`task cli:new  --taskfile <TEMPLATE_TASKFILE_PATH>`
+You can create a new project from the template by running the following command:
 
-### To Add to an Existing Project
+```shell
+python -m project_template new --path projects/new_repo
+```
+
+#### CLI Options
+
+| Option            | Default?     | Description                                                          |
+|-------------------|--------------|----------------------------------------------------------------------|
+| --path            | Prompts User | Specifies the path to create to the new project                      |
+| --project_name    | Prompts User | The name of the project to create                                    |
+| --repo_name       | Prompts User | The name of the repo to create                                       |
+| --author          | Prompts User | The name of the repo's author                                        |
+| --repo_url        | Prompts User | The URL to the repo                                                  |
+| --repo_remote_url | Prompts User | The remote URL for pushing the repo to Git                           |
+| --dry-run         | False        | Whether to describe the changes that will be made without making any |
+
+### Add to an existing project
 
 !!! warning
-    This will potentially clobber existing files if they overlap with the template files.
-    Look at the `templates/` directory to see what files are being overwritten.
+This has the potential to overwrite files in the project.
+If you are doing this, pay attention to the files you are asked whether to overwrite.
 
-Run the following command to add to an existing project:
+You can add the template to an existing project by running the following command:
 
-`task cli:add --taskfile <TEMPLATE_TASKFILE_PATH>`
+```shell
+python -m project_template add --path projects/existing_repo
+```
+
+#### CLI Options
+
+| Option            | Default?     | Description                                                          |
+|-------------------|--------------|----------------------------------------------------------------------|
+| --path            | `.`          | Specifies the path to the project to add the template to             |
+| --project_name    | Prompts User | The name of the project being added to                               |
+| --repo_name       | Prompts User | The name of the repo                                                 |
+| --author          | Prompts User | The name of the repo's author                                        |
+| --repo_url        | Prompts User | The URL to the repo                                                  |
+| --repo_remote_url | Prompts User | The remote URL for pushing the repo to Git                           |
+| --dry-run         | False        | Whether to describe the changes that will be made without making any |
