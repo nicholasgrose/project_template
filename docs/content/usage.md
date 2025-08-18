@@ -47,6 +47,7 @@ python -m project_template new --path projects/new_repo
 
 | Option            | Default?     | Description                                                          |
 |-------------------|--------------|----------------------------------------------------------------------|
+| --template        | `general`    | The project template to use (only "general" is valid at this time)   |
 | --path            | Prompts User | Specifies the path to create to the new project                      |
 | --project_name    | Prompts User | The name of the project to create                                    |
 | --repo_name       | Prompts User | The name of the repo to create                                       |
@@ -71,6 +72,7 @@ python -m project_template add --path projects/existing_repo
 
 | Option            | Default?     | Description                                                          |
 |-------------------|--------------|----------------------------------------------------------------------|
+| --template        | `general`    | The project template to use (only "general" is valid at this time)   |
 | --path            | `.`          | Specifies the path to the project to add the template to             |
 | --project_name    | Prompts User | The name of the project being added to                               |
 | --repo_name       | Prompts User | The name of the repo                                                 |
