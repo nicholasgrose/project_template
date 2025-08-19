@@ -33,7 +33,7 @@ def install_virtual_environment_dependencies(directory: Path, venv_dir: Path) ->
     """
     print("Installing dependencies...")
     venv_python_path = venv_python(venv_dir)
-    subprocess.run([venv_python_path, "-m", "pip", "install", "-r", directory / "requirements.txt"])
+    subprocess.run([venv_python_path, "-m", "pip", "install", "-r", directory / "requirements.txt"], cwd=directory)
 
 
 def build_configured_virtual_environment(directory: Path) -> None:

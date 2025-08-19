@@ -55,6 +55,8 @@ python generate.py new --path projects/new_repo
 | --author          | Prompts User | The name of the repo's author                                        |
 | --repo-url        | Prompts User | The URL to the repo                                                  |
 | --repo-remote-url | Prompts User | The remote URL for pushing the repo to Git                           |
+| -n                | `None`       | Answer NO to all overwrite prompts                                   |
+| -y                | `None`       | Answer YES to all overwrite prompts                                  |
 | --dry-run         | `False`      | Whether to describe the changes that will be made without making any |
 
 ### Add to an existing project
@@ -81,4 +83,6 @@ python generate.py add --path projects/existing_repo
 | --author          | Prompts User | The name of the repo's author                                        |
 | --repo-url        | Prompts User | The URL to the repo                                                  |
 | --repo-remote-url | Prompts User | The remote URL for pushing the repo to Git                           |
+| -n                | `None`       | Answer NO to all overwrite prompts                                   |
+| -y                | `None`       | Answer YES to all overwrite prompts                                  |
 | --dry-run         | `False`      | Whether to describe the changes that will be made without making any |

@@ -101,6 +101,7 @@ def apply_plan(
         context: dict,
         dry_run: bool,
         confirm_overwrite: bool,
+        always_overwrite: bool,
 ) -> None:
     """Apply the render plan to disk.
 
@@ -121,6 +122,9 @@ def apply_plan(
             if not click.confirm(f"File exists: {item.target}. Overwrite?", default=False):
                 click.echo(f"Skipped existing file: {item.target}")
                 continue
+
+        if not confirm_overwrite and not always_overwrite:
+            continue
 
         if item.is_template:
             template_rel = str(item.source)
@@ -191,8 +195,18 @@ def prompt_missing_context(
     return normalize_context(project_name, repo_name, author, repo_url, repo_remote_url)
 
 
-def execute_render(template_name: str, dest_path: Path, context: dict, dry_run: bool) -> None:
-    """Common execution for both 'new' and 'add' commands: resolve paths, build plan, apply."""
+def execute_render(template_name: str, dest_path: Path, context: dict, dry_run: bool,
+                   always_overwrite: bool | None) -> None:
+    """
+    Common execution for both 'new' and 'add' commands: resolve paths, build plan, apply.
+    Args:
+        template_name: The name of the template to render.
+        dest_path: The path to the destination directory.
+        context: The context dict to pass to the template.
+        dry_run: Whether to just show the proposed changes without executing them.
+        always_overwrite: Whether to always overwrite existing files. None to prompt.
+    Returns: None
+    """
     repo_root = find_repo_root(Path.cwd())
     src_root = template_root(repo_root, template_name)
 
@@ -200,13 +214,35 @@ def execute_render(template_name: str, dest_path: Path, context: dict, dry_run: 
     plan = build_render_plan(src_root, dest_path)
 
     # Always confirm overwriting for safety in both commands
-    apply_plan(env, plan, context, dry_run=dry_run, confirm_overwrite=True)
+    apply_plan(env, plan, context, dry_run=dry_run, confirm_overwrite=always_overwrite is None,
+               always_overwrite=always_overwrite if always_overwrite is not None else False)
 
 
 @click.group(help="Project templating CLI. Creates or adds files from templates/ into a target directory.")
 @click.version_option(package_name="generation_cli")
 def cli() -> None:
+    """Entrypoint for the click group."""
     pass
+
+
+def validate_overwrite_behavior(answer_no: bool | None, answer_yes: bool | None) -> bool | None:
+    """
+    Validate the file overwrite behavior from the command line arguments.
+    Args:
+        answer_no: Whether the no flag was passed
+        answer_yes: Whether the yes flag was passed
+    Returns: The value to use for always_overwrite
+    """
+    will_always_overwrite = None
+
+    if answer_yes and answer_no:
+        raise click.ClickException("Cannot specify both --yes and --no to all overwrite prompts")
+    elif answer_yes is not None:
+        will_always_overwrite = True
+    elif answer_no is not None:
+        will_always_overwrite = False
+
+    return will_always_overwrite
 
 
 @cli.command(help="Create a new project from a template into a destination directory.")
@@ -217,11 +253,19 @@ def cli() -> None:
 @click.option("--author", default=None, help="Author name")
 @click.option("--repo-url", default=None, help="Repository URL")
 @click.option("--repo-remote-url", default=None, help="Remote URL for git origin")
+@click.option("-n", "--no", "answer_no", is_flag=True, default=None,
+              help="Whether to answer NO to all overwrite prompts")
+@click.option("-y", "--yes", "answer_yes", is_flag=True, default=None,
+              help="Whether to answer YES to all overwrite prompts")
 @click.option("--dry-run", is_flag=True, default=False, help="Describe actions without making any changes")
 def new(template_name: str, dest_path: Path | None, project_name: str, repo_name: str | None, author: str | None,
-        repo_url: str | None, repo_remote_url: str | None, dry_run: bool) -> None:
+        repo_url: str | None, repo_remote_url: str | None, answer_no: bool | None, answer_yes: bool | None,
+        dry_run: bool) -> None:
+    always_overwrite = validate_overwrite_behavior(answer_no, answer_yes)
+
     if dest_path is None:
         dest_path = click.prompt("Destination path", type=click.Path(path_type=Path))
+
     dest_path = Path(dest_path)
 
     if not dry_run:
@@ -230,7 +274,7 @@ def new(template_name: str, dest_path: Path | None, project_name: str, repo_name
     # Prompt for missing optional fields and normalize context
     ctx = prompt_missing_context(project_name, repo_name, author, repo_url, repo_remote_url)
 
-    execute_render(template_name, dest_path, ctx, dry_run)
+    execute_render(template_name, dest_path, ctx, dry_run, always_overwrite)
 
     if not dry_run:
         run_bootstrap_task(dest_path)
@@ -253,17 +297,25 @@ def run_bootstrap_task(dest_path: Path) -> None:
 @click.option("--author", default=None, help="Author name")
 @click.option("--repo-url", default=None, help="Repository URL")
 @click.option("--repo-remote-url", default=None, help="Remote URL for git origin")
+@click.option("-n", "--no", "answer_no", is_flag=True, default=None,
+              help="Whether to answer NO to all overwrite prompts")
+@click.option("-y", "--yes", "answer_yes", is_flag=True, default=None,
+              help="Whether to answer YES to all overwrite prompts")
 @click.option("--dry-run", is_flag=True, default=False, help="Describe actions without making any changes")
 def add(template_name: str, dest_path: Path, project_name: str, repo_name: str | None, author: str | None,
-        repo_url: str | None, repo_remote_url: str | None, dry_run: bool) -> None:
+        repo_url: str | None, repo_remote_url: str | None, answer_no: bool | None, answer_yes: bool | None,
+        dry_run: bool) -> None:
+    always_overwrite = validate_overwrite_behavior(answer_no, answer_yes)
+
     dest_path = Path(dest_path)
+
     if not dest_path.exists() or not dest_path.is_dir():
         raise click.ClickException(f"Path does not exist or is not a directory: {dest_path}")
 
     # Prompt for missing optional fields and normalize context
     ctx = prompt_missing_context(project_name, repo_name, author, repo_url, repo_remote_url)
 
-    execute_render(template_name, dest_path, ctx, dry_run)
+    execute_render(template_name, dest_path, ctx, dry_run, always_overwrite)
 
     if not dry_run:
         run_bootstrap_task(dest_path)

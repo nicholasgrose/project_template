@@ -1,7 +1,7 @@
-import os
 import subprocess
 import sys
 from pathlib import Path
+from subprocess import CalledProcessError
 
 from scripts.venv_wrappers.bootstrap import build_configured_venv_from_repo_root
 from scripts.venv_wrappers.path import venv_python, find_repo_root
@@ -57,13 +57,12 @@ def main() -> None:
 
     virtual_python = venv_python(virtual_directory)
 
-    # If we aren't already running under the venv interpreter, re-exec
-    if Path(sys.executable).resolve() != virtual_python.resolve():
-        subprocess.call([str(virtual_python), "-m", GENERATOR_MODULE, *sys.argv[1:]], cwd=project_root)
-        return
-
-    # If already in the venv (e.g., developer invoked with the venv python), just run it:
-    subprocess.check_call([str(virtual_python), "-m", GENERATOR_MODULE, *sys.argv[1:]], cwd=project_root)
+    try:
+        subprocess.check_call([str(virtual_python), "-m", GENERATOR_MODULE, *sys.argv[1:]], cwd=project_root)
+    except CalledProcessError as e:
+        sys.exit(e.returncode)
+    except KeyboardInterrupt:
+        pass
 
 
 if __name__ == "__main__":
