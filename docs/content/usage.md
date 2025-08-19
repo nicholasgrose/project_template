@@ -55,6 +55,9 @@ python generate.py new --path projects/new_repo
 | --author          | Prompts User | The name of the repo's author                                        |
 | --repo-url        | Prompts User | The URL to the repo                                                  |
 | --repo-remote-url | Prompts User | The remote URL for pushing the repo to Git                           |
+| --repo-docs-url   | Prompts User | The URL for the project docs                                         |
+| --contact-email   | Prompts User | The email for contact                                                |
+| --security-email  | Prompts User | The email for reporting sensitive issues                             |
 | -n                | `None`       | Answer NO to all overwrite prompts                                   |
 | -y                | `None`       | Answer YES to all overwrite prompts                                  |
 | --dry-run         | `False`      | Whether to describe the changes that will be made without making any |
@@ -63,7 +66,7 @@ python generate.py new --path projects/new_repo
 
 /// warning
 This has the potential to overwrite files in the project.
-If you are doing this, pay attention to the files you are asked whether to overwrite.
+If you are doing this, have any changes committed so you can revert any unintentional changes.
 ///
 
 You can add the template to an existing project by running the following command:
@@ -83,6 +86,9 @@ python generate.py add --path projects/existing_repo
 | --author          | Prompts User | The name of the repo's author                                        |
 | --repo-url        | Prompts User | The URL to the repo                                                  |
 | --repo-remote-url | Prompts User | The remote URL for pushing the repo to Git                           |
+| --repo-docs-url   | Prompts User | The URL for the project docs                                         |
+| --contact-email   | Prompts User | The email for contact                                                |
+| --security-email  | Prompts User | The email for reporting sensitive issues                             |
 | -n                | `None`       | Answer NO to all overwrite prompts                                   |
 | -y                | `None`       | Answer YES to all overwrite prompts                                  |
 | --dry-run         | `False`      | Whether to describe the changes that will be made without making any |

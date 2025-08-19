@@ -147,6 +147,9 @@ def normalize_context(
         author: str,
         repo_url: str,
         repo_remote_url: str,
+        repo_docs_url: str,
+        contact_email: str,
+        security_email: str,
 ) -> dict:
     """Build the context dict passed to templates, ensuring all expected keys exist.
 
@@ -154,12 +157,15 @@ def normalize_context(
     We also include repo_remote_url even if not used, to future-proof templates.
     """
     return {
+        "date": datetime.now().strftime("%Y-%m-%d"),
         "project_name": project_name,
         "repo_name": repo_name if len(repo_name.strip()) < 0 else project_name,
         "author": author,
         "repo_url": repo_url,
         "repo_remote_url": repo_remote_url,
-        "date": datetime.now().strftime("%Y-%m-%d"),
+        "repo_docs_url": repo_docs_url,
+        "contact_email": contact_email,
+        "security_email": security_email,
     }
 
 
@@ -169,6 +175,9 @@ def prompt_missing_context(
         author: str | None,
         repo_url: str | None,
         repo_remote_url: str | None,
+        repo_docs_url: str | None,
+        contact_email: str | None,
+        security_email: str | None,
 ) -> dict:
     """Prompt the user for any missing context fields and return a normalized context dict.
 
@@ -192,7 +201,20 @@ def prompt_missing_context(
     if repo_remote_url is None:
         repo_remote_url = click.prompt("Remote URL for git origin", default="", show_default=False)
 
-    return normalize_context(project_name, repo_name, author, repo_url, repo_remote_url)
+    # repo_docs_url: prompt, allow empty
+    if repo_docs_url is None:
+        repo_docs_url = click.prompt("URL for project docs", default="", show_default=False)
+
+    # contact_email: prompt, allow empty
+    if contact_email is None:
+        contact_email = click.prompt("The email to suggest for contact", default="", show_default=False)
+
+    # security_email: prompt, allow empty
+    if security_email is None:
+        security_email = click.prompt("The email to suggest for reporting sensitive issues", default="", show_default=False)
+
+    return normalize_context(project_name, repo_name, author, repo_url, repo_remote_url, repo_docs_url, contact_email,
+                             security_email)
 
 
 def execute_render(template_name: str, dest_path: Path, context: dict, dry_run: bool,
@@ -253,13 +275,17 @@ def validate_overwrite_behavior(answer_no: bool | None, answer_yes: bool | None)
 @click.option("--author", default=None, help="Author name")
 @click.option("--repo-url", default=None, help="Repository URL")
 @click.option("--repo-remote-url", default=None, help="Remote URL for git origin")
+@click.option("--repo-docs-url", default=None, help="URL for the git docs")
+@click.option("--contact-email", default=None, help="Email for contact")
+@click.option("--security-email", default=None, help="Email for reporting security issues for git origin")
 @click.option("-n", "--no", "answer_no", is_flag=True, default=None,
               help="Whether to answer NO to all overwrite prompts")
 @click.option("-y", "--yes", "answer_yes", is_flag=True, default=None,
               help="Whether to answer YES to all overwrite prompts")
 @click.option("--dry-run", is_flag=True, default=False, help="Describe actions without making any changes")
 def new(template_name: str, dest_path: Path | None, project_name: str, repo_name: str | None, author: str | None,
-        repo_url: str | None, repo_remote_url: str | None, answer_no: bool | None, answer_yes: bool | None,
+        repo_url: str | None, repo_remote_url: str | None, repo_docs_url: str | None, contact_email: str | None,
+        security_email: str | None, answer_no: bool | None, answer_yes: bool | None,
         dry_run: bool) -> None:
     always_overwrite = validate_overwrite_behavior(answer_no, answer_yes)
 
@@ -272,7 +298,8 @@ def new(template_name: str, dest_path: Path | None, project_name: str, repo_name
         ensure_destination_for_new(dest_path)
 
     # Prompt for missing optional fields and normalize context
-    ctx = prompt_missing_context(project_name, repo_name, author, repo_url, repo_remote_url)
+    ctx = prompt_missing_context(project_name, repo_name, author, repo_url, repo_remote_url, repo_docs_url,
+                                 contact_email, security_email)
 
     execute_render(template_name, dest_path, ctx, dry_run, always_overwrite)
 
@@ -297,13 +324,17 @@ def run_bootstrap_task(dest_path: Path) -> None:
 @click.option("--author", default=None, help="Author name")
 @click.option("--repo-url", default=None, help="Repository URL")
 @click.option("--repo-remote-url", default=None, help="Remote URL for git origin")
+@click.option("--repo-docs-url", default=None, help="URL for the git docs")
+@click.option("--contact-email", default=None, help="Email for contact")
+@click.option("--security-email", default=None, help="Email for reporting security issues for git origin")
 @click.option("-n", "--no", "answer_no", is_flag=True, default=None,
               help="Whether to answer NO to all overwrite prompts")
 @click.option("-y", "--yes", "answer_yes", is_flag=True, default=None,
               help="Whether to answer YES to all overwrite prompts")
 @click.option("--dry-run", is_flag=True, default=False, help="Describe actions without making any changes")
 def add(template_name: str, dest_path: Path, project_name: str, repo_name: str | None, author: str | None,
-        repo_url: str | None, repo_remote_url: str | None, answer_no: bool | None, answer_yes: bool | None,
+        repo_url: str | None, repo_remote_url: str | None, repo_docs_url: str | None, contact_email: str | None,
+        security_email: str | None, answer_no: bool | None, answer_yes: bool | None,
         dry_run: bool) -> None:
     always_overwrite = validate_overwrite_behavior(answer_no, answer_yes)
 
@@ -313,7 +344,8 @@ def add(template_name: str, dest_path: Path, project_name: str, repo_name: str |
         raise click.ClickException(f"Path does not exist or is not a directory: {dest_path}")
 
     # Prompt for missing optional fields and normalize context
-    ctx = prompt_missing_context(project_name, repo_name, author, repo_url, repo_remote_url)
+    ctx = prompt_missing_context(project_name, repo_name, author, repo_url, repo_remote_url, repo_docs_url,
+                                 contact_email, security_email)
 
     execute_render(template_name, dest_path, ctx, dry_run, always_overwrite)
 

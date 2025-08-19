@@ -28,7 +28,7 @@ task bootstrap
 
 ### Docs
 
-This repository has a [docs](docs) folder configured with [mkdocs](https://www.mkdocs.org) and
+This repository has a [docs](docs) directory configured with [mkdocs](https://www.mkdocs.org) and
 the [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) theme.
 
 To launch a local version of the documentation, you can run:
