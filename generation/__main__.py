@@ -1,8 +1,7 @@
-from __future__ import annotations
-
 import shutil
 import subprocess
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Iterable
 
@@ -140,10 +139,10 @@ def apply_plan(
 
 def normalize_context(
         project_name: str,
-        repo_name: str | None,
-        author: str | None,
-        repo_url: str | None,
-        repo_remote_url: str | None,
+        repo_name: str,
+        author: str,
+        repo_url: str,
+        repo_remote_url: str,
 ) -> dict:
     """Build the context dict passed to templates, ensuring all expected keys exist.
 
@@ -152,10 +151,11 @@ def normalize_context(
     """
     return {
         "project_name": project_name,
-        "repo_name": repo_name or project_name,
-        "author": author or "",
-        "repo_url": repo_url or "",
-        "repo_remote_url": repo_remote_url or "",
+        "repo_name": repo_name if len(repo_name.strip()) < 0 else project_name,
+        "author": author,
+        "repo_url": repo_url,
+        "repo_remote_url": repo_remote_url,
+        "date": datetime.now().strftime("%Y-%m-%d"),
     }
 
 

@@ -1,6 +1,32 @@
-# {{ project_name }}
+#   {{ project_name }}
 
 ## About
 
 This is a new project!
-Huzzah!
+
+## Setup
+
+If you would like to make changes to this repo, you can clone it and follow these instructions.
+
+### Requirements
+
+- [Python](https://www.python.org)
+- [Task](https://taskfile.dev)
+
+### Bootstrapping
+
+After cloning, the project must be bootstrapped.
+
+```shell
+task bootstrap
+```
+
+### Docs
+
+This repository has a [docs](docs) folder configured with [mkdocs](https://www.mkdocs.org) and
+the [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) theme.
+
+To launch a local version of the documentation, you can run:
+```shell
+task docs:serve
+```

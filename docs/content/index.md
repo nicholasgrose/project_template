@@ -1,25 +1,24 @@
 # Welcome to Nicholas's Project Template
 
-This is a repository that stores my new repo template.
+This is a repository that stores my repo template.
 This provides scripts to generate a new repo as well as to apply the template to an existing repo.
 
 ## Feature Overview
 
-### Template Repo
+### Template Project
 
 The template repo provides a number of useful features:
 
 - `.gitignore` and `.gitattributes` with sensible defaults
-- `LICENSE` and `README.md` files
+- `LICENSE`, `README.md`, and `CHANGELOG.md` files
 - A pre-configured mkdocs skeleton site
-- A platform-agnostic mkdocs wrapper script
-- A pre-configured GitHub Actions workflow to deploy the site to GitHub Pages
+- Platform-agnostic scripts for bootstrapping the repo and viewing the site locally
+- A pre-configured CI to deploy the static mkdocs site
 - Built-in run configurations for JetBrains IDEs
 
-### Template Script
+### Generation Script
 
 The generation script provides the following features:
 
-- Ability to provide names to your site and related files
-- Pre-generation and configuration of a new Git repo
-- Pre-generation of a virtual environment for the mkdocs site
+- Automatic bootstrapping of new repos by initializing Git and building virtual environments
+- Template-based repo generation

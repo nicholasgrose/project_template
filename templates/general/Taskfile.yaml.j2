@@ -1,7 +1,9 @@
 version: '3'
 
 vars:
-  {% raw %}PY: "{{.PYTHON | default `python`}}"{% endraw %}
+  {% raw %}
+  PY: "{{.PYTHON | default `python`}}"
+  {% endraw %}
   GIT_REMOTE: "{{ repo_remote_url }}"
 
 tasks:
@@ -11,6 +13,7 @@ tasks:
       - git:bootstrap
       - docs:bootstrap
 
+  {% raw %}
   git:bootstrap:
     desc: Bootstrap git repo
     status:
@@ -20,15 +23,14 @@ tasks:
       - git add -A
       - git commit -m "Initial commit"
       - git branch -M main
-      - "git remote add origin {.GIT_REMOTE}"
+      - "git remote add origin {{.GIT_REMOTE}}"
       - git push -u origin main
 
-  {% raw %}
   docs:bootstrap:
     desc: Create/update MkDocs virtualenv and install deps
     status:
       - test -d docs/.venv
-    cmd: "{{.PY}} -m scripts.docs.mkdocs_bootstrap"
+    cmd: "{{.PY}} -m scripts.venv_wrappers.bootstrap docs"
 
   docs:serve:
     desc: Serve docs locally with live reload

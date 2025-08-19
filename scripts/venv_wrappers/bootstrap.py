@@ -3,7 +3,7 @@ import sys
 import venv
 from pathlib import Path
 
-from scripts.venv_wrappers.get_path import venv_python, find_repo_root
+from scripts.venv_wrappers.path import venv_python, find_repo_root
 
 
 def create_virtual_environment(directory: Path) -> Path:
@@ -57,3 +57,17 @@ def build_configured_venv_from_repo_root(path: str) -> None:
     repo_root = find_repo_root()
     directory = repo_root / path if len(path.strip()) > 0 else repo_root
     build_configured_virtual_environment(directory)
+
+
+def run() -> None:
+    """
+    Bootstraps the virtual environment at the specified path or the repo root if no path is specified.
+    Returns: None
+    """
+    path = sys.argv[1] if len(sys.argv) > 1 else ""
+
+    build_configured_venv_from_repo_root(path)
+
+
+if __name__ == "__main__":
+    run()

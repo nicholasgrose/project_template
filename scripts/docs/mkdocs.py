@@ -2,7 +2,7 @@ import os
 import subprocess
 import sys
 
-from scripts.venv_wrappers.get_path import find_repo_root, venv_python
+from scripts.venv_wrappers.path import find_repo_root, venv_python
 
 
 def main() -> None:

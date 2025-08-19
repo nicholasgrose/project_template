@@ -9,9 +9,30 @@ If you like how it works, feel free to use it, though!
 
 See the [doc site](https://nicholasgrose.github.io/project_template/) for the documentation!
 
-## Making Changes
+## Setup
 
-If you intend to download and change this template, I would recommend running `task bootstrap` after cloning.
-This will create all the necessary virtual environments and install all the dependencies.
+If you would like to make changes to this repo, you can clone it and follow these instructions.
 
-You can then use the CLI as described in the documentation.
+### Requirements
+
+- [Python](https://www.python.org)
+- [Task](https://taskfile.dev)
+
+### Bootstrapping
+
+After cloning, the project must be bootstrapped.
+
+```shell
+task bootstrap
+```
+
+### Docs
+
+This repository has a [docs](docs) folder configured with [mkdocs](https://www.mkdocs.org) and
+the [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) theme.
+
+To launch a local version of the documentation, you can run:
+
+```shell
+task docs:serve
+```

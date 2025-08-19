@@ -19,11 +19,3 @@ Design notes:
 - We keep functions short and focused (see guidelines) and document behavior succinctly.
 - We avoid tight coupling: template root resolution and file rendering are pure functions.
 """
-
-from __future__ import annotations
-
-__all__ = [
-    "__version__",
-]
-
-__version__ = "0.1.0"
