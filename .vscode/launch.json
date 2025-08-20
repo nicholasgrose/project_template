@@ -31,7 +31,13 @@
                 "something/fun",
                 "--repo-remote-url",
                 "git@github.com",
-                "--dry-run"
+                "--dry-run",
+                "--repo-docs-url",
+                "example.com",
+                "--contact-email",
+                "contact@gmail",
+                "--security-email",
+                "security@gmail",
             ],
         },
         {
@@ -55,6 +61,12 @@
                 "something/fun",
                 "--repo-remote-url",
                 "git@github.com",
+                "--repo-docs-url",
+                "example.com",
+                "--contact-email",
+                "contact@gmail",
+                "--security-email",
+                "security@gmail",
             ],
         }
     ]

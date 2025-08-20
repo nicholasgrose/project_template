@@ -15,7 +15,7 @@
     <option name="ADD_SOURCE_ROOTS" value="true" />
     <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
     <option name="SCRIPT_NAME" value="generate.py" />
-    <option name="PARAMETERS" value="new --path .venv/testing/dry --project-name something --author me --repo-url github.com --repo-name something/fun --repo-remote-url git@github.com --dry-run" />
+    <option name="PARAMETERS" value="new --path .venv/testing/dry --project-name something --author me --repo-url github.com --repo-name something/fun --repo-remote-url git@github.com --dry-run --repo-docs-url example.com --contact-email contact@gmail --security-email security@gmail" />
     <option name="SHOW_COMMAND_LINE" value="false" />
     <option name="EMULATE_TERMINAL" value="false" />
     <option name="MODULE_MODE" value="false" />
