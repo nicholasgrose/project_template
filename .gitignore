@@ -32,6 +32,9 @@
 # GitToolbox plugin
 .idea/**/git_toolbox_prj.xml
 
+# Developer Tools plugin
+.idea/**/developer-tools.xml
+
 # AWS User-specific
 .idea/**/aws.xml
 
