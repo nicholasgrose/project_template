@@ -1,3 +1,5 @@
+# This is using templates from https://github.com/github/gitignore.
+
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json

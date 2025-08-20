@@ -36,3 +36,7 @@ To launch a local version of the documentation, you can run:
 ```shell
 task docs:serve
 ```
+
+### License
+
+This project is licensed under the [MIT License](LICENSE).

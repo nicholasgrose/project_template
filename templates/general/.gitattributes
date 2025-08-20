@@ -1,3 +1,5 @@
+# This is using templates from https://github.com/gitattributes/gitattributes.
+
 # Common settings that generally should always be used with your language specific settings
 
 # Auto detect text files and perform LF normalization
