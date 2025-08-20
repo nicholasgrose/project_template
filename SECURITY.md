@@ -1,0 +1,13 @@
+<!--
+Learn more about this file at https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file.
+-->
+
+# Security Policy
+
+We take security seriously.
+Sensitive issues should never be made public and should instead be reported privately following the guidelines below.
+
+## Reporting a Vulnerability
+
+To report a security issue, please email <security@etymologiae.net> with a description of the issue, the steps you took
+to create the issue, affected versions, and, if known, mitigations for the issue.

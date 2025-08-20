@@ -1,3 +1,7 @@
+<!--
+Learn more about this file at https://docs.github.com/en/code-security/getting-started/adding-a-security-policy-to-your-repository.
+-->
+
 # Contributor Covenant 3.0 Code of Conduct
 
 ## Our Pledge

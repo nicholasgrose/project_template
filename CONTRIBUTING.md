@@ -1,3 +1,7 @@
+<!--
+Learn more about this file at https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file.
+-->
+
 <!-- omit in toc -->
 
 # Contributing to Nicholas's Project Template
