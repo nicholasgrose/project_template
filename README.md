@@ -1,3 +1,7 @@
+<!--
+You can read more about writing a README at https://www.makeareadme.com.
+-->
+
 # Nicholas's Project Template
 
 ## About
