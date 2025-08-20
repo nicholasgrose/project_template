@@ -1,0 +1,10 @@
+{
+    "configurations": [
+       {
+           "type": "command",
+           "name": "Serve Docs",
+           "program": "task",
+           "args": ["docs:serve"]
+       },
+    ]
+}
