@@ -14,8 +14,8 @@ its own dependencies, so you don’t need to manually install libraries like Jin
 ### Clone the template repository:
 
 ```shell
-git clone git@github.com:nicholasgrose/project_template.git
-cd project_template
+git clone git@github.com:nicholasgrose/palimpsest.git
+cd palimpsest
 ```
 
 ### Use the CLI from the repo root
@@ -23,7 +23,7 @@ cd project_template
 You can see the help text by running:
 
 ```shell
-python ./generate.py --help
+python -m pal --help
 ```
 
 On the first run, the CLI will:
@@ -41,7 +41,7 @@ Subsequent runs reuse the environment.
 You can create a new project from the template by running the following command:
 
 ```shell
-python generate.py new --path projects/new_repo
+python -m pal new --path projects/new_repo
 ```
 
 #### CLI Options
@@ -72,7 +72,7 @@ If you are doing this, have any changes committed so you can revert any unintent
 You can add the template to an existing project by running the following command:
 
 ```shell
-python generate.py add --path projects/existing_repo
+python -m pal add --path projects/existing_repo
 ```
 
 #### CLI Options

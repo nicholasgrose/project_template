@@ -2,18 +2,19 @@
 You can read more about writing a README at https://www.makeareadme.com.
 -->
 
-# Nicholas's Project Template
+# Palimpsest
 
 ## About
 
-This is a repository to help me quickly start new projects.
-If you like how it works, feel free to use it, though!
+Palimpsest is a cross-stack project generator and template orchestrator.
+It helps you create new repositories and evolve them over time with consistent standards.
+If you like how it works, feel free to use it!
 
 ## Documentation
 
-See the [doc site](https://nicholasgrose.github.io/project_template/) for the documentation!
+See the [doc site](https://nicholasgrose.github.io/palimpsest/) for the documentation!
 
-## Setup
+## CLI
 
 If you would like to make changes to this repo, you can clone it and follow these instructions.
 
@@ -22,18 +23,30 @@ If you would like to make changes to this repo, you can clone it and follow thes
 - [Python](https://www.python.org)
 - [Task](https://taskfile.dev)
 
-### Bootstrapping
+### Using the CLI
 
-After cloning, the project must be bootstrapped.
+Run the CLI via Python:
 
 ```shell
-task bootstrap
+python -m pal --help
+```
+
+Create a new project:
+
+```shell
+python -m pal new --template general --path ./my-new-project --project-name "My New Project"
+```
+
+Preview adding files to an existing project:
+
+```shell
+python -m pal add --template general --dry-run --project-name "My Existing Project"
 ```
 
 ### Docs
 
-This repository has a [docs](docs) directory configured with [mkdocs](https://www.mkdocs.org) and
-the [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) theme.
+This repository has a [docs](docs) directory configured with [MkDocs](https://www.mkdocs.org) and
+the [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme.
 
 To launch a local version of the documentation, you can run:
 

@@ -2,7 +2,7 @@ version: '3'
 
 vars:
   PY: "{{.PYTHON | default `python`}}"
-  GIT_REMOTE: "git@github.com:nicholasgrose/project_template.git"
+  GIT_REMOTE: "git@github.com:nicholasgrose/palimpsest.git"
 
 tasks:
   bootstrap:
@@ -38,8 +38,8 @@ tasks:
   cli:bootstrap:
     desc: Create/update CLI virtualenv and install deps
     status:
-      - test -d generation_cli/.venv
-    cmd: "{{.PY}} -m scripts.venv_wrappers.bootstrap generation"
+      - test -d pal/.venv
+    cmd: "{{.PY}} -m scripts.venv_wrappers.bootstrap pal"
 
   root:bootstrap:
     desc: Bootstrap the scripts of the overall repository

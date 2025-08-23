@@ -1,4 +1,4 @@
-# Project Generator: Vision and Design Overview
+# Palimpsest: Vision and Design Overview
 
 This document explains the motivation, goals, and high-level design for a cross-stack project generator that uses a
 declarative configuration and a reusable template.

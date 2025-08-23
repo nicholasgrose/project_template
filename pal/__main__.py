@@ -1,3 +1,5 @@
+import os
+import sys
 import shutil
 import subprocess
 from dataclasses import dataclass
@@ -10,6 +12,15 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 # Constants
 DEFAULT_TEMPLATE = "general"
+
+# Ensure we are running under the managed CLI environment; if not, delegate to the bootstrapper.
+if os.environ.get("PAL_BOOTSTRAPPED") != "1":
+    repo_root = Path(__file__).resolve().parent.parent
+    launcher = repo_root / "pal.py"
+    if launcher.exists():
+        # Re-exec via the launcher which will set up the virtualenv and reinvoke -m pal
+        subprocess.check_call([sys.executable, str(launcher), *sys.argv[1:]], cwd=repo_root)
+        sys.exit(0)
 
 
 @dataclass(frozen=True)
@@ -240,8 +251,8 @@ def execute_render(template_name: str, dest_path: Path, context: dict, dry_run: 
                always_overwrite=always_overwrite if always_overwrite is not None else False)
 
 
-@click.group(help="Project templating CLI. Creates or adds files from templates/ into a target directory.")
-@click.version_option(package_name="generation_cli")
+@click.group(help="Palimpsest CLI. Creates or adds files from templates/ into a target directory.")
+@click.version_option(package_name="palimpsest")
 def cli() -> None:
     """Entrypoint for the click group."""
     pass
@@ -354,7 +365,7 @@ def add(template_name: str, dest_path: Path, project_name: str, repo_name: str |
 
 
 def main() -> None:
-    """Entrypoint for python -m generation_cli"""
+    """Entrypoint for python -m pal"""
     cli(standalone_mode=True)
 
 

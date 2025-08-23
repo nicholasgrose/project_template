@@ -1,4 +1,4 @@
-# Welcome to Nicholas's Project Template
+# Welcome to Palimpsest
 
 This is a repository that stores my repo template.
 This provides scripts to generate a new repo as well as to apply the template to an existing repo.

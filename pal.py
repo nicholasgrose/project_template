@@ -1,3 +1,4 @@
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -6,7 +7,7 @@ from subprocess import CalledProcessError
 from scripts.venv_wrappers.bootstrap import build_configured_venv_from_repo_root
 from scripts.venv_wrappers.path import venv_python, find_repo_root
 
-GENERATOR_MODULE = "generation"  # what will be run via python -m
+GENERATOR_MODULE = "pal"  # what will be run via python -m
 LAUNCHER_VERSION = "2025.08.17.1"  # bump to force reinstallation of dependencies
 
 
@@ -19,6 +20,12 @@ def read_marker(venv_dir: Path) -> str | None:
     """
     marker = venv_dir / ".version"
     return marker.read_text().strip() if marker.exists() else None
+
+
+essential_doc = """
+Note: This file replaces the former generate.py launcher. Users should run `python -m pal` normally.
+This bootstrapper exists to self-manage the CLI virtualenv and invoke the pal package module.
+"""
 
 
 def write_marker(venv_dir: Path, version: str) -> None:
@@ -44,7 +51,7 @@ def needs_reinstall(venv_dir: Path) -> bool:
 
 def main() -> None:
     """
-    Bootstrap the virtual environment if needed and run the CLI.
+    Bootstrap the virtual environment if needed and run the pal CLI.
     Returns: None
     """
     project_root = find_repo_root()
@@ -58,7 +65,9 @@ def main() -> None:
     virtual_python = venv_python(virtual_directory)
 
     try:
-        subprocess.check_call([str(virtual_python), "-m", GENERATOR_MODULE, *sys.argv[1:]], cwd=project_root)
+        env = dict(os.environ)
+        env["PAL_BOOTSTRAPPED"] = "1"
+        subprocess.check_call([str(virtual_python), "-m", GENERATOR_MODULE, *sys.argv[1:]], cwd=project_root, env=env)
     except CalledProcessError as e:
         sys.exit(e.returncode)
     except KeyboardInterrupt:

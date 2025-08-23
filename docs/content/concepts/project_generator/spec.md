@@ -1,4 +1,4 @@
-# Project Generator Specification (v1)
+# Palimpsest Specification (v1)
 
 This document defines the initial schema, features, operations, and workflows for the project generator.
 
@@ -115,8 +115,8 @@ Presets are curated answer files stored in the template repository. Examples:
 
 Usage:
 
-- copy with: `copier copy -a presets/python-lib.yml <template> <dest>`
-- update in-place: `copier update` (answers are stored at repo root)
+- copy with: `python -m pal new --template general --path <dest> --project-name "Name"`
+- update in-place: `python -m pal add --template general --project-name "Name"`
 
 ## Workflows
 
@@ -129,7 +129,7 @@ New Project (from preset):
 
 Upgrade Existing Project:
 
-1) Edit `.copier-answers.yml` (or use wrapper CLI) to enable/disable features.
+1) Edit the Palimpsest answers file or use the pal CLI to enable/disable features.
 2) Run `pretend` to preview changes.
 3) Run `update` to apply.
 4) Commit and push.

@@ -1,23 +1,39 @@
-# Quickstart: Using the Project Generator
+# Quickstart: Using Palimpsest
 
 ## Create from a preset
 
+Using the built-in CLI:
+
 ```bash
-copier copy -a presets/python-lib.yml <template-repo> ./my-new-lib
+python -m pal new --template general --path ./my-new-lib --project-name "My New Lib"
+```
+
+Tip: You can add optional metadata, for example:
+
+```bash
+python -m pal new \
+  --template general \
+  --path ./my-new-lib \
+  --project-name "My New Lib" \
+  --repo-name my-new-lib \
+  --author "Your Name" \
+  --repo-url "https://github.com/you/my-new-lib"
 ```
 
 ## Preview changes to an existing repo
 
-### Inside the generated project
+From inside the target project directory:
 
 ```bash
-copier update --pretend
+python -m pal add --template general --dry-run --project-name "My Existing Project"
 ```
 
-### Apply updates after editing features
+## Apply updates after editing features
+
+When ready to write files, drop --dry-run:
 
 ```bash
-copier update
+python -m pal add --template general --project-name "My Existing Project"
 ```
 
 ## Common toggles

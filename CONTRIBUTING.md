@@ -4,7 +4,7 @@ Learn more about this file at https://docs.github.com/en/communities/setting-up-
 
 <!-- omit in toc -->
 
-# Contributing to Nicholas's Project Template
+# Contributing to Palimpsest
 
 First off, thanks for taking the time to contribute! ❤️
 
@@ -40,23 +40,23 @@ community looks forward to your contributions. 🎉
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the
-[Nicholas's Project Template Code of Conduct](https://github.com/nicholasgrose/project_template/blob/main/CODE_OF_CONDUCT.md).
+[Palimpsest Code of Conduct](https://github.com/nicholasgrose/palimpsest/blob/main/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behavior
 to <contact@etymologiae.net>.
 
 ## I Have a Question
 
 > If you want to ask a question, we assume that you have read the
-> available [Documentation](https://nicholasgrose.github.io/project_template/).
+> available [Documentation](https://nicholasgrose.github.io/palimpsest/).
 
 Before you ask a question, it is best to search for
-existing [Issues](https://github.com/nicholasgrose/project_template/issues) that might help you. In
+existing [Issues](https://github.com/nicholasgrose/palimpsest/issues) that might help you. In
 case you have found a suitable issue and still need clarification, you can write your question in this issue. It is also
 advisable to search the internet for answers first.
 
 If you then still feel the need to ask a question and need clarification, we recommend the following:
 
-- Open an [Issue](https://github.com/nicholasgrose/project_template/issues/new).
+- Open an [Issue](https://github.com/nicholasgrose/palimpsest/issues/new).
 - Provide as much context as you can about what you're running into.
 - Provide project and platform versions (nodejs, npm, etc), depending on what seems relevant.
 
@@ -96,11 +96,11 @@ following steps in advance to help us fix any potential bug as fast as possible.
 - Make sure that you are using the latest version.
 - Determine if your bug is really a bug and not an error on your side e.g. using incompatible environment
   components/versions (Make sure that you have read
-  the [documentation](https://nicholasgrose.github.io/project_template/). If you are looking for
+  the [documentation](https://nicholasgrose.github.io/palimpsest/). If you are looking for
   support, you might want to check [this section](#i-have-a-question)).
 - To see if other users have experienced (and potentially already solved) the same issue you are having, check if there
   is not already a bug report existing for your bug or error in
-  the [bug tracker](https://github.com/nicholasgrose/project_template/issues?q=label%3Abug).
+  the [bug tracker](https://github.com/nicholasgrose/palimpsest/issues?q=label%3Abug).
 - Also make sure to search the internet (including Stack Overflow) to see if users outside of the community have
   discussed the issue.
 - Collect information about the bug:
@@ -120,7 +120,7 @@ following steps in advance to help us fix any potential bug as fast as possible.
 
 We use issues to track bugs and errors. If you run into an issue with the project:
 
-- Open an [Issue](https://github.com/nicholasgrose/project_template/issues/new). (Since we can't be sure at this point
+- Open an [Issue](https://github.com/nicholasgrose/palimpsest/issues/new). (Since we can't be sure at this point
   whether it is a bug or not, we ask
   you not to talk about a bug yet and not to label the issue.)
 - Explain the behavior you would expect and the actual behavior.
@@ -152,10 +152,10 @@ community to understand your suggestion and find related suggestions.
 #### Before Submitting an Enhancement
 
 - Make sure that you are using the latest version.
-- Read the [documentation](https://nicholasgrose.github.io/project_template/) carefully and find out if the
+- Read the [documentation](https://nicholasgrose.github.io/palimpsest/) carefully and find out if the
   functionality is already covered, maybe by
   an individual configuration.
-- Perform a [search](https://github.com/nicholasgrose/project_template/issues) to see if the enhancement has already
+- Perform a [search](https://github.com/nicholasgrose/palimpsest/issues) to see if the enhancement has already
   been suggested. If it has, add a
   comment to the existing issue instead of opening a new one.
 - Find out whether your idea fits with the scope and aims of the project. It's up to you to make a strong case to
@@ -167,7 +167,7 @@ community to understand your suggestion and find related suggestions.
 
 #### How Do I Submit a Good Enhancement Suggestion?
 
-Enhancement suggestions are tracked as [issues](https://github.com/nicholasgrose/project_template/issues).
+Enhancement suggestions are tracked as [issues](https://github.com/nicholasgrose/palimpsest/issues).
 
 - Use a **clear and descriptive title** for the issue to identify the suggestion.
 - Provide a **step-by-step description of the suggested enhancement** in as many details as possible.

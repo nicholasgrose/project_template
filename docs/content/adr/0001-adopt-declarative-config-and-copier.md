@@ -10,7 +10,7 @@ We need a way to:
 
 - Scaffold new repositories across multiple ecosystems with shared defaults.
 - Re-apply evolving standards to existing repositories.
-    - Optionally orchestrate provider actions (Git hosting, CI) and language bootstraps.
+    - Optionally, orchestrate provider actions (Git hosting, CI) and language bootstraps.
       Traditional one-shot generators don’t provide safe updates.
       We need a declarative approach with repeatable updates and
       clear conditions for features.
